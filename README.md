@@ -1,2 +1,2 @@
-# Full-Stack-bootcamp
-Files related to the bootcamp
+# Todo List Manager
+To do list manager web application.
