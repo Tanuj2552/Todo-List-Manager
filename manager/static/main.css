@@ -1,6 +1,8 @@
 .base{
-    font-size: 30px;
-    text-align: center;
+    font-size: 75px;
+    top:0;
+    position: absolute;
     font-family: 'Courier New', Courier, monospace;
-    background-color: bisque;
+    background-color: rgb(231, 96, 86);
+    color: rgb(63, 72, 83);
 }
