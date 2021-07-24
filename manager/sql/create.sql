@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS Tasks;
 
 CREATE TABLE Tasks(
-    task_date CURRENT_TIMESTAMP,
+    task_date DATE,
     Title text,
     Description text
 );
