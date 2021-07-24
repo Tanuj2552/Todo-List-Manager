@@ -1,8 +1,29 @@
 .base{
     font-size: 75px;
-    top:0;
     position: absolute;
+    top:0;
+    margin: 0px 0px 0px 280px;
     font-family: 'Courier New', Courier, monospace;
-    background-color: rgb(231, 96, 86);
-    color: rgb(63, 72, 83);
+    color: rgb(255, 255, 255);
+    background-color: #242121;
+}
+
+.tasks{
+    top:0;
+    margin: 100px 0px 0px 500px;
+    color: red;
+    position: absolute;
+}
+
+.tablemy{
+    top:0;
+    margin: 150px 0px 0px 300px;
+    position: absolute;
+}
+
+.styledbox{
+    top:0;
+    margin: 250px 0px 0px 320px;
+    position: absolute;
+    background-color: cornflowerblue;
 }
