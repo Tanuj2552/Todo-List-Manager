@@ -64,9 +64,45 @@
                     <li><hr class="dropdown-divider"></li>
                     <li><a class="dropdown-item" href="#">Sign out</a></li>
                   </ul>
-                </div>
-              </div> -->
-              
+                </div> -->
+              </div> 
+        <div class = "base bg-dark">List Manager</div>  
+        
+        
+
+
+        <h4 class="tasks display-4">Tasks to be done today</h4>
+        <p>
+          <table class="tablemy table table-striped">
+            <thead class="thead-dark">
+            <tr>
+              <th scope="col"> Date </th>
+              <th scope="col"> Task Name  </th>
+              <th scope="col"> Description </th>
+            </tr>
+            </thead>
+            {% for date, task, description in values %}
+            <tr>              
+              <td scope="row">{{date}}</td>
+              <td >{{task}}</td>
+              <td >{{description}}</td>
+            </tr>
+            {%endfor%}
+          </table>
+
+          {% for date, task, description in values %}
+            <div class = "styledbox">
+              <p>{{date}}</p>
+              <p>{{task}}</p>
+              <p>{{description}}</p>
+            </div>
+          {%endfor%}
+        </p>
+
+
+
+
+
  
         
     </body>
