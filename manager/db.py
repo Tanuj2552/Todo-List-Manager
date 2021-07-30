@@ -6,6 +6,8 @@ import click
 from flask import current_app, g
 from flask.cli import with_appcontext
 
+from . import lister
+
 def get_db():
     if 'db' not in g: 
         dbname = current_app.config['DATABASE'] 
@@ -30,9 +32,15 @@ def init_db():
 
     cur = db.cursor()
     date = datetime.datetime.today()
+    day = lister.get_date(date)
+    time = lister.get_time(date)
     title = "Exam"
     Description = "Remind me to take the exam at 3 pm on today"
-    cur.execute("INSERT INTO Tasks (task_date, Title, Description) VALUES (?,?,?)",[date, title, Description])
+    done = 0
+    cur.execute("INSERT INTO Tasks (task_date, task_time, Title, Description, done) VALUES (?,?,?,?,?)",[day, time, title, Description, done])
+    desc2 = "so cool to do it"
+    done2 = 1
+    cur.execute("INSERT INTO Tasks (task_date, task_time, Title, Description, done) VALUES (?,?,?,?,?)",[day, time, title, desc2, done2])
 
 
     click.echo("Insertions done")
