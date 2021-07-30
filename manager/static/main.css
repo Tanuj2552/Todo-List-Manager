@@ -11,19 +11,14 @@
 .tasks{
     top:0;
     margin: 100px 0px 0px 500px;
-    color: red;
+    color: rgba(43, 22, 22, 0.452);
     position: absolute;
 }
 
-.tablemy{
-    top:0;
-    margin: 150px 0px 0px 300px;
+.wrapper {
+    text-align: center;
+    display: inline-block;
     position: absolute;
-}
-
-.styledbox{
-    top:0;
-    margin: 250px 0px 0px 320px;
-    position: absolute;
-    background-color: cornflowerblue;
-}
+    top: 50%;
+    left: 50%;
+  }
