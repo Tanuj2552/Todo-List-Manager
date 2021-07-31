@@ -1,9 +1,11 @@
 DROP TABLE IF EXISTS Tasks;
 
 CREATE TABLE Tasks(
-    task_date DATE,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    task_date text,
     task_time real,
     Title text,
     Description text,
-    Done INTEGER
+    Done INTEGER,
+    original_task_time text
 );
