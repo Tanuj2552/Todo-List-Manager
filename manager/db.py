@@ -20,6 +20,13 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
+def get_date(d):
+    return d.date()
+
+def get_time(d):
+    time = d.strftime("%H: %M")
+    return time
+
 def init_db():
     db = get_db()
     
@@ -30,25 +37,22 @@ def init_db():
     cur.close()
     db.commit()
 
+    '''
     cur = db.cursor()
     date = datetime.datetime.today()
-    day = lister.get_date(date)
-    time = lister.get_time(date)
+    day = get_date(date)
+    time = get_time(date)
     title = "Exam"
     Description = "Remind me to take the exam at 3 pm on today"
     done = 0
-    cur.execute("INSERT INTO Tasks (task_date, task_time, Title, Description, done) VALUES (?,?,?,?,?)",[day, time, title, Description, done])
+    cur.execute("INSERT INTO Tasks (task_date, task_time, Title, Description, done, original_task_time) VALUES (?,?,?,?,?,?)",[day, time, title, Description, done, date])
     desc2 = "so cool to do it"
     done2 = 1
-    cur.execute("INSERT INTO Tasks (task_date, task_time, Title, Description, done) VALUES (?,?,?,?,?)",[day, time, title, desc2, done2])
-
-
+    cur.execute("INSERT INTO Tasks (task_date, task_time, Title, Description, done, original_task_time) VALUES (?,?,?,?,?,?)",[day, time, title, desc2, done2, date])
+    '''
+    
     click.echo("Insertions done")
-    cur.close()
-    db.commit()
     close_db()
-
-
 
 
 @click.command('initdb', help="initialise the database")
