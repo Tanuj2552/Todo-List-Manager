@@ -81,10 +81,10 @@ def Today_tasks():
     cur = conn.cursor()
     today_date = str(datetime.datetime.today().date())
 
-    cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? AND task_date = ?",[0, today_date])
-    day, time, title, description = cur.fetchall()[0]
-    print("They are: ")
-    print(day, time,  title, description)
+    # cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? AND task_date = ?",[0, today_date])
+    # day, time, title, description = cur.fetchall()[0]
+    # print("They are: ")
+    # print(day, time,  title, description)
     cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? AND task_date = ?",[0, today_date])
     values = cur.fetchall()
     print("And values are: ")
@@ -104,23 +104,22 @@ def Week_tasks():
     today_date = str(datetime.datetime.today().date())
 
     today = datetime.datetime.today().date()
-    dates = [(today + datetime.timedelta(days=i)).date() for i in range(0 - today.weekday(), 7 - today.weekday())]
+    dates = [(today + datetime.timedelta(days=i)) for i in range(0 - today.weekday(), 7 - today.weekday())]
+    
+    dates = [str(get_date(str(datetime.datetime(x.year, x.month, x.day))[:10])) for x in dates]
+    
     day_of_week = today.isocalendar()[2] - 1
     rest_of_week = dates[day_of_week:]
 
-    print("Weeks dates are: ", dates)
-    print("days of week are: ", day_of_week)
-    print("Rest of week is: ", rest_of_week)
 
-
-    cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? AND task_date IN ?",[0, rest_of_week])
-    day, time, title, description = cur.fetchall()[0]
-    print("They are: ")
-    print(day, time,  title, description)
-    cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? AND task_date IN ?",[0, rest_of_week])
+    # cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? AND task_date IN (?)",[0, *rest_of_week])
+    # day, time, title, description = cur.fetchall()[0]
+    # print("They are: ")
+    # print(day, time,  title, description)
+    cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? AND task_date IN (?)",[0, *rest_of_week])
     values = cur.fetchall()
-    print("And values are: ")
-    print(values)
+    # print("And values are: ")
+    # print(values)
 
     cur.close()
     conn.commit()
