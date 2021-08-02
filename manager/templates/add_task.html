@@ -4,23 +4,23 @@
 <h4 class="tasks display-4" style = "text-align: center;"> Add a Task </h4>
 
 
-    <form action="{{url_for('lister.AddTask')}}" method="POST" style = "top:0; margin: 195px 0px 0px 270px; position: absolute; padding: 10px 10px 10px 10px;">
-        <div class="form-group">
+    <form action="{{url_for('lister.AddTask')}}" method="POST" style = "top:0; margin: 195px 0px 0px 270px; position: absolute; padding: 20px 20px 20px 20px;">
+        <div class="form-group" style = "padding: 20px 20px 20px 20px; width: 1000px;">
           <label for="Title"> Title </label>
-          <input type="text" class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Enter Task name" name = "Title">
+          <input type="text" class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Enter Task name" name = "Title" style = "height:40px;">
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style = "padding: 20px 20px 20px 20px;">
           <label for="Description">Description</label>
-          <input type="text" class="form-control" id="Description" placeholder="Description of task" name = "Description">
+          <textarea type="text" class="form-control" id="Description" placeholder="Description of task" name = "Description" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
         
-        <div class = "form-group">
-          <label for="birthdaytime">Birthday (date and time):</label>
+        <div class = "form-group" style = "padding: 20px 20px 20px 20px;">
+          <label for="birthdaytime">Enter the date and time of the task:</label>
           <input type="datetime-local" id="birthdaytime" name="birthdaytime">
        </div>
         
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary" style = "margin-left: 20px;">Submit</button>
     </form>
   
 </form>
