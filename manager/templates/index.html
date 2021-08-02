@@ -6,7 +6,7 @@
        
           {% for day, time, task, description in values %}
         <div class="card" style="margin: 10px 10px 10px 10px; position: relative; width: 1000px;">
-          <h5 class="card-header">{{time}}</h5>
+          <h5 class="card-header">{{day + ", "+time}}</h5>
           <div class="card-body">
             <h5 class="card-title">{{task}}</h5>
             <p class="card-text">{{description}}</p>
