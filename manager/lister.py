@@ -19,6 +19,14 @@ def get_time(d):
     time = d.strftime("%H: %M")
     return time
 
+def format_date(d):
+    if d:
+        d = datetime.datetime.strptime(d, '%Y-%m-%d')
+        v = d.strftime("%a - %b %d, %Y")
+        return v
+    else:
+        return None
+
 @bp.route("/")
 def dashboard():
     conn = db.get_db()
@@ -32,6 +40,9 @@ def dashboard():
     print("And values are: ")
     print(values)
 
+    cur.close()
+    conn.commit()
+    db.close_db()
     return render_template('index.html', values = values)
 
 @bp.route("/homepage")
@@ -110,17 +121,11 @@ def Week_tasks():
     
     day_of_week = today.isocalendar()[2] - 1
     rest_of_week = dates[day_of_week:]
-
-
-    # cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? AND task_date IN (?)",[0, *rest_of_week])
-    # day, time, title, description = cur.fetchall()[0]
-    # print("They are: ")
-    # print(day, time,  title, description)
-    cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? AND task_date IN (?)",[0, *rest_of_week])
+    
+    cur.execute("SELECT task_date, task_time, Title, Description FROM Tasks WHERE Done = ? ",[0,])
     values = cur.fetchall()
-    # print("And values are: ")
-    # print(values)
-
+    
+    values = list(filter(lambda x: x[0] in rest_of_week, values))
     cur.close()
     conn.commit()
     db.close_db()
