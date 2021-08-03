@@ -37,15 +37,16 @@ def init_db():
     cur.close()
     db.commit()
 
-    '''
+    
     cur = db.cursor()
     date = datetime.datetime.today()
     day = get_date(date)
     time = get_time(date)
-    title = "Exam"
-    Description = "Remind me to take the exam at 3 pm on today"
+    title = "subscribe"
+    Description = "Please subscribe to get preimum features"
     done = 0
     cur.execute("INSERT INTO Tasks (task_date, task_time, Title, Description, done, original_task_time) VALUES (?,?,?,?,?,?)",[day, time, title, Description, done, date])
+    '''
     desc2 = "so cool to do it"
     done2 = 1
     cur.execute("INSERT INTO Tasks (task_date, task_time, Title, Description, done, original_task_time) VALUES (?,?,?,?,?,?)",[day, time, title, desc2, done2, date])
