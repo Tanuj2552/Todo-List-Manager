@@ -4,14 +4,14 @@
         <h4 class="tasks display-4" style = "text-align: center;"> Tasks to be done today </h4>
       <div style = "top:0; margin: 195px 0px 0px 270px; position: absolute; padding: 10px 10px 10px 10px;">
        
-          {% for day, time, task, description in values %}
+          {% for id, day, time, task, description in values %}
         <div class="card" style="margin: 10px 10px 10px 10px; position: relative; width: 1000px;">
           <h5 class="card-header">{{day + ", "+time}}</h5>
           <div class="card-body">
             <h5 class="card-title">{{task}}</h5>
             <p class="card-text">{{description}}</p>
             <div class="wrapper">
-              <a href="#" class="btn btn-primary" style="padding: 10px;">Edit</a>
+              <a href="/{{id}}/edit_task" class="btn btn-primary" style="padding: 10px;">Edit</a>
               <a href="#" class="btn btn-primary" style="padding: 10px;">Done</a>
             </div>
           </div>
