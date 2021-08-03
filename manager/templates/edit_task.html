@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body %}
+
+<h4 class="tasks display-4" style = "text-align: center;"> Edit the task a Task </h4>
+
+{% for id, Title, Description, original_task_time in values %}
+    <form action="{{url_for('lister.Edit_tasks', id = id)}}" method="POST" style = "top:0; margin: 195px 0px 0px 270px; position: absolute; padding: 20px 20px 20px 20px;">
+        <div class="form-group" style = "padding: 20px 20px 20px 20px; width: 1000px;">
+          <label for="Title"> Title </label>
+          <textarea type="text" class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Enter Task name" name = "Title" style = "height:40px;">
+            {{Title}}
+          </textarea>
+        </div>
+
+        <div class="form-group" style = "padding: 20px 20px 20px 20px;">
+          <label for="Description">Description</label>
+          <textarea type="text" class="form-control" id="Description" placeholder="Description of task" name = "Description" id="exampleFormControlTextarea1" rows="3">
+              {{Description}}
+          </textarea>
+        </div>
+        
+        <div class = "form-group" style = "padding: 20px 20px 20px 20px;">
+          <label for="birthdaytime">Change the date and time of the task if you want</label>
+          <input type="datetime-local" id="birthdaytime" name="birthdaytime">
+       </div>
+        
+        <button type="submit" class="btn btn-primary" style = "margin-left: 20px;">Submit</button>
+    </form>
+{%endfor%}
+</form>
+
+
+{% endblock %}
