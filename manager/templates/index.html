@@ -4,7 +4,9 @@
         <h4 class="tasks display-4" style = "text-align: center;"> Tasks to be done today </h4>
       <div style = "top:0; margin: 195px 0px 0px 270px; position: absolute; padding: 10px 10px 10px 10px;">
        
-          {% for id, day, time, task, description in values %}
+          {% for id, day, time, task, description, page in values %}
+      <form action="{{url_for('lister.Done_tasks', id = id)}}" method="POST">
+        <h6 style = "opacity:0.0; " id = "pages" name = "pages">{{page}}</h6>
         <div class="card" style="margin: 10px 10px 10px 10px; position: relative; width: 1000px;">
           <h5 class="card-header">{{day + ", "+time}}</h5>
           <div class="card-body">
@@ -12,11 +14,12 @@
             <p class="card-text">{{description}}</p>
             <div class="wrapper">
               <a href="/{{id}}/edit_task" class="btn btn-primary" style="padding: 10px;">Edit</a>
-              <a href="#" class="btn btn-primary" style="padding: 10px;">Done</a>
+              <a href="/{{id}}/done_task" class="btn btn-primary" style="padding: 10px;">Done</a>
             </div>
           </div>
         </div>
           {%endfor%}
+        </form>
        
       </div>
 
