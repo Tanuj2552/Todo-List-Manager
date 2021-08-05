@@ -46,6 +46,14 @@ def dashboard():
     cur.close()
     conn.commit()
     db.close_db()
+
+    for i in range(len(values)):
+        templ = list(values[i])
+        templ.append("day")
+        values[i] = templ
+
+    print("new values after week are: ", values)
+    #print("len of each_task is , ",len(values[0]))
     return render_template('index.html', values = values)
 
 @bp.route("/homepage")
@@ -64,7 +72,12 @@ def home_page():
     cur.close()
     conn.commit()
     db.close_db()
+    for i in range(len(values)):
+        templ = list(values[i])
+        templ.append("day")
+        values[i] = templ
 
+    print("new values after week are: ", values)
     return render_template('index.html', values = values)
 
 @bp.route("/add_task", methods=["GET", "POST"])
@@ -75,8 +88,8 @@ def AddTask():
         return render_template("add_task.html")
 
     elif request.method == "POST":
-        description = request.form.get('Description')
-        Title = request.form.get('Title')
+        description = request.form.get('Description').lstrip().rstrip()
+        Title = request.form.get('Title').lstrip().rstrip()
         done = 0
         date_goog = request.form.get('birthdaytime')
         date = get_date(date_goog[:10])
@@ -107,6 +120,10 @@ def Today_tasks():
     cur.close()
     conn.commit()
     db.close_db()
+    for i in range(len(values)):
+        templ = list(values[i])
+        templ.append("day")
+        values[i] = templ
 
     return render_template('index.html', values = values)
 
@@ -124,14 +141,19 @@ def Week_tasks():
     
     day_of_week = today.isocalendar()[2] - 1
     rest_of_week = dates[day_of_week:]
-    
+    print('rest of the week is ', rest_of_week)
     cur.execute("SELECT id, task_date, task_time, Title, Description FROM Tasks WHERE Done = ? ",[0,])
     values = cur.fetchall()
-    
-    values = list(filter(lambda x: x[0] in rest_of_week, values))
+    print("weeks values are : ", values)
+    values = list(filter(lambda x: x[1] in rest_of_week, values))
+    print("final values are : ", values)
     cur.close()
     conn.commit()
     db.close_db()
+    for i in range(len(values)):
+        templ = list(values[i])
+        templ.append("week")
+        values[i] = templ
 
     return render_template('index.html', values = values)
 
@@ -148,8 +170,8 @@ def Edit_tasks(id):
         return render_template("edit_task.html", values = values)
 
     elif request.method == "POST":
-        description = request.form.get('Description')
-        Title = request.form.get('Title')
+        description = request.form.get('Description').lstrip().rstrip()
+        Title = request.form.get('Title').lstrip().rstrip()
         # done = 0
         date_goog = request.form.get('birthdaytime')
         print("received date_goog is ", date_goog)
@@ -165,6 +187,26 @@ def Edit_tasks(id):
         db.close_db()
         
         return redirect(url_for("lister.home_page"))
+
+
+@bp.route("/<id>/done_task", methods=["GET", "POST"])
+def Done_tasks(id):
+    conn = db.get_db()
+    cursor = conn.cursor()
+    if request.method == "GET1":      
+        return render_template("base.html")
+
+    else:
+        page_curr = request.form.get('pages')
+        cursor.execute("UPDATE TASKS SET Done = ? where id = ?",[1, id])
+        cursor.close()
+        conn.commit()
+        db.close_db()
+        if(page_curr == "week"):
+            return redirect(url_for("lister.Week_tasks"))
+        
+        else:
+            return redirect(url_for("lister.Today_tasks"))
 
 
 
