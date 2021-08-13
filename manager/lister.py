@@ -60,15 +60,20 @@ def dashboard():
 def home_page():
     conn = db.get_db()
     cur = conn.cursor()
-    cur.execute("SELECT id, task_date, task_time, Title, Description FROM Tasks WHERE Done = ?",[0])
+    '''cur.execute("SELECT id, task_date, task_time, Title, Description FROM Tasks WHERE Done = ?",[0])
     id, day, time, title, description = cur.fetchall()[0]
     print("They are: ")
     print(id, day, time,  title, description)
+    '''
     cur.execute("SELECT id, task_date, task_time, Title, Description FROM Tasks WHERE Done = ?",[0])
+    today = datetime.datetime.today().date()
+    
     values = cur.fetchall()
     print("And values are: ")
     print(values)
-
+    values = list(filter(lambda x: get_date(x[1]) <= get_date(today) , values))
+    print("new values after filter are: ")
+    print(values)
     cur.close()
     conn.commit()
     db.close_db()
@@ -78,7 +83,7 @@ def home_page():
         values[i] = templ
 
     print("new values after week are: ", values)
-    return render_template('index.html', values = values)
+    return render_template('home_page.html', values = values)
 
 @bp.route("/add_task", methods=["GET", "POST"])
 def AddTask():
