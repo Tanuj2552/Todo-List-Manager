@@ -8,6 +8,9 @@ from . import db
 
 bp = Blueprint("lister", "lister", url_prefix="")
 
+months = {1:"Jan", 2:"Feb", 3:"March", 5:"May", 4:"April", 6:"June", 7:"July", 8:"Aug", 9:"Sep", 10:"Oct", 11:"Nov", 12:"Dec"}
+weekday = {1:"Mon", 2:"Tue", 3:"Wed", 4:"Thu", 5:"Fri", 6:"Sat", 7:"Sun"}
+
 def get_date(d):
     d = str(d)
     d = datetime.datetime.strptime(d, '%Y-%m-%d')
@@ -26,6 +29,23 @@ def format_date(d):
         return v
     else:
         return None
+
+def get_weekday(d):
+    day_of_week = weekday[get_date(d).isocalendar()[2]]
+    return day_of_week
+
+def display_date(d):
+    date = str(d)
+    day = date[8:]
+    month = months[int(date[5:7])]
+    weekday = get_weekday(d)
+    notation = {1:"st", 2:"nd", 3:"rd", 21:"st", 22:"nd", 23:"rd", 31:"st"}
+    add = "th"
+    if(int(day) in notation.keys()):
+        add = notation[int(day)]
+
+    final =  str(int(day)) + add +" " + month + " " + "( " + weekday + " )"
+    return final
 
 @bp.route("/")
 def dashboard():
@@ -80,6 +100,7 @@ def home_page():
     for i in range(len(values)):
         templ = list(values[i])
         templ.append("day")
+        templ[1] = display_date(templ[1])
         values[i] = templ
 
     print("new values after week are: ", values)
@@ -128,6 +149,7 @@ def Today_tasks():
     for i in range(len(values)):
         templ = list(values[i])
         templ.append("day")
+        templ[1] = display_date(templ[1])
         values[i] = templ
 
     return render_template('index.html', values = values)
@@ -157,8 +179,10 @@ def Week_tasks():
     db.close_db()
     for i in range(len(values)):
         templ = list(values[i])
-        templ.append("week")
+        templ.append("day")
+        templ[1] = display_date(templ[1])
         values[i] = templ
+
 
     return render_template('index.html', values = values)
 
@@ -198,7 +222,7 @@ def Edit_tasks(id):
 def Done_tasks(id):
     conn = db.get_db()
     cursor = conn.cursor()
-    if request.method == "GET1":      
+    if request.method == "GET":      
         return render_template("base.html")
 
     else:
@@ -212,6 +236,11 @@ def Done_tasks(id):
         
         else:
             return redirect(url_for("lister.Today_tasks"))
+
+@bp.route("/history")
+def history():
+    conn = db.get_db()
+    cursor = conn.cursor()    
 
 
 
