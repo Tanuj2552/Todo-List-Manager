@@ -47,36 +47,9 @@ def display_date(d):
     final =  str(int(day)) + add +" " + month + " " + "( " + weekday + " )"
     return final
 
+
+
 @bp.route("/")
-def dashboard():
-    conn = db.get_db()
-    cur = conn.cursor()
-   # cur.execute("SELECT id, task_date, task_time, Title, Description FROM Tasks WHERE Done = ?",[0])
-   # id, day, time, title, description = cur.fetchall()[0]
-   # print("They are: ")
-   # print(id, day, time,  title, description)
-    everything = cur.execute("SELECT * FROM Tasks").fetchall()
-    print("everything is ", everything)
-
-    cur.execute("SELECT id, task_date, task_time, Title, Description FROM Tasks WHERE Done = ?",[0])
-    values = cur.fetchall()
-    print("And values are: ")
-    print(values)
-
-    cur.close()
-    conn.commit()
-    db.close_db()
-
-    for i in range(len(values)):
-        templ = list(values[i])
-        templ.append("day")
-        values[i] = templ
-
-    print("new values after week are: ", values)
-    #print("len of each_task is , ",len(values[0]))
-    return render_template('index.html', values = values)
-
-@bp.route("/homepage")
 def home_page():
     conn = db.get_db()
     cur = conn.cursor()
@@ -195,7 +168,7 @@ def Edit_tasks(id):
     date_goog_init = cursor.execute("SELECT original_task_time FROM Tasks WHERE id = ?", [id]).fetchall()[0]
     print("inti google date is: ", date_goog_init)
     if request.method == "GET":
-        
+        #('foo')
         return render_template("edit_task.html", values = values)
 
     elif request.method == "POST":
@@ -223,7 +196,17 @@ def Done_tasks(id):
     conn = db.get_db()
     cursor = conn.cursor()
     if request.method == "GET":      
-        return render_template("base.html")
+        #return render_template("base.html")
+        page_curr = request.form.get('pages')
+        cursor.execute("UPDATE TASKS SET Done = ? where id = ?",[1, id])
+        cursor.close()
+        conn.commit()
+        db.close_db()
+        if(page_curr == "week"):
+            return redirect(url_for("lister.Week_tasks"))
+        
+        else:
+            return redirect(url_for("lister.Today_tasks"))
 
     else:
         page_curr = request.form.get('pages')
