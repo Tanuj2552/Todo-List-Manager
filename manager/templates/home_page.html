@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block body %}
 
-<h4 class="tasks display-4" style = "text-align: center; color: rgb(236, 79, 79);"> {{heading}} </h4>
-<div style = "top:0; margin: 195px 0px 0px 270px; position: absolute; padding: 10px 10px 10px 10px;">
+<h4 class="tasks display-4" style = "text-align: center; color: rgb(236, 79, 79); margin: 120px 0px 0px 450px; position: absolute;"> {{heading}} </h4>
+<div style = "top:0; margin: 160px 0px 0px 290px; position: absolute; padding: 10px 10px 10px 10px;">
        
     {% for id, day, time, task, description, page in values %}
 <form action="{{url_for('lister.Done_tasks', id = id)}}" method="POST">
