@@ -77,7 +77,7 @@ def home_page():
         values[i] = templ
 
     print("new values after week are: ", values)
-    return render_template('home_page.html', values = values)
+    return render_template('home_page.html', values = values, heading = "Alerts/Overdues")
 
 @bp.route("/add_task", methods=["GET", "POST"])
 def AddTask():
@@ -125,7 +125,7 @@ def Today_tasks():
         templ[1] = display_date(templ[1])
         values[i] = templ
 
-    return render_template('index.html', values = values)
+    return render_template('home_page.html', values = values, heading = "Tasks to be done today")
 
 
 @bp.route("/weeks_tasks")
@@ -157,7 +157,7 @@ def Week_tasks():
         values[i] = templ
 
 
-    return render_template('index.html', values = values)
+    return render_template('home_page.html', values = values, heading = "Tasks for the Week")
 
 @bp.route("/<id>/edit_task", methods=["GET", "POST"])
 def Edit_tasks(id):
