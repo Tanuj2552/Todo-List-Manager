@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block body %}
 
-<h4 class="tasks display-4" style = "text-align: center;"> Add a Task </h4>
+
+<h4 class="tasks display-4" style = "text-align: center; color: rgb(92, 89, 109); margin: 120px 0px 0px 450px; position: absolute;"> Add a Task </h4>
 
 
-    <form action="{{url_for('lister.AddTask')}}" method="POST" style = "top:0; margin: 195px 0px 0px 270px; position: absolute; padding: 20px 20px 20px 20px;">
+    <form action="{{url_for('lister.AddTask')}}" method="POST" style = "top:0; margin: 155px 0px 0px 270px; position: absolute; padding: 20px 20px 20px 20px;">
         <div class="form-group" style = "padding: 20px 20px 20px 20px; width: 1000px;">
           <label for="Title"> Title </label>
           <input type="text" class="form-control" id="Title" aria-describedby="emailHelp" placeholder="Enter Task name" name = "Title" style = "height:40px;">
