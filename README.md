@@ -25,3 +25,5 @@ This app is mainly intended to run with python version > python 3.6 and ubuntu v
 1) ```flask initdb``` - to setup the database for the web application
 2) ```flask run``` - to run the web application
 
+Finally open local server - http://127.0.0.1:5000/ in your browser (preferably-google chrome) to see the web app. 
+
