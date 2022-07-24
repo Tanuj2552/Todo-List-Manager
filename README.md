@@ -1,5 +1,16 @@
 # Todo List Manager
 To do list manager is web application that helps in remainding your tasks, alerts your overdues, and gives you a list of daily and weekly tasks to be done.
+This app is mainly intended to run with python version > python 3.6 and ubuntu version > ubuntu 18. Please ensure that you have these criteria fulfilled to run the web app.
+
+* Run the commands on the terminal to install git to clone the repository 
+1) ```sudo apt-get update```
+2) ```sudo apt-get install git```
+
+* Clone the repository using the command 
+```git clone https://github.com/Tanuj2552/Todo-List-Manager.git```
+
+* Run this command to install all the modules required (you can run this in virtul env if you want, refer - https://linuxize.com/post/how-to-create-python-virtual-environments-on-ubuntu-18-04/)
+```pip install -r requirements.txt```
 
 * Please run the following commands on the terminal to create database for the web app
 ```sudo apt update```
